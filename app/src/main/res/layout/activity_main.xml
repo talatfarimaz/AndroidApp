@@ -17,10 +17,13 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="30dp"
-        android:text="@string/result" />
+        android:textSize="40sp"
+        android:hint="@string/result" />
 
     <EditText
         android:id="@+id/process"
+        android:textSize="30sp"
+        android:hint="@string/process"
         android:layout_width="314dp"
         android:layout_height="51dp"
         android:layout_below="@+id/resultText"
@@ -29,7 +32,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="30dp"
-        android:autofillHints="Enter process!"
+        android:autofillHints="Process!"
         android:enabled="false" />
 
     <ImageButton

@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">Basic Calculator</string>
+    <string name="app_name">BASIC CALCULATOR</string>
     <string name="result">Result</string>
+    <string name="process">Process</string>
 </resources>
