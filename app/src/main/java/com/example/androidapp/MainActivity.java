@@ -72,10 +72,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void setOne(View view) {
-        processText.setText("" + processText.getText() + 1);
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -110,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 processText.setText("" + processText.getText() + 0);
                 break;
             case R.id.comma:
-                processText.setText("" + processText.getText() + ".");
+                operatorControl('.');
+                // processText.setText("" + processText.getText() + ".");
                 break;
             case R.id.add:
                 operatorControl('+');
@@ -134,14 +131,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.result:
-                String processExpression = processText.getText().toString();
-                char lastCharacter = processExpression.charAt(processExpression.length() - 1);
-                if (lastCharacter == '+' || lastCharacter == '*' || lastCharacter == '-' || lastCharacter == '/') {
-                    processText.setText(processText.getText().toString().substring(0, processText.getText().toString().length() - 1));
+                if (!processText.getText().toString().equals("")) {
+                    String processExpression = processText.getText().toString();
+                    char lastCharacter = processExpression.charAt(processExpression.length() - 1);
+                    if (lastCharacter == '+' || lastCharacter == '*' || lastCharacter == '-' || lastCharacter == '/') {
+                        processText.setText(processText.getText().toString().substring(0, processText.getText().toString().length() - 1));
+                    }
+                    Expression expression = new ExpressionBuilder(processText.getText().toString()).build();
+                    double result = expression.evaluate();
+                    resultText.setText("" + result);
                 }
-                Expression expression = new ExpressionBuilder(processText.getText().toString()).build();
-                double result = expression.evaluate();
-                resultText.setText("" + result);
+
                 break;
             default:
                 break;
@@ -150,12 +150,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void operatorControl(char operator) {
-        char lastCharacter = processText.getText().toString().charAt(processText.getText().toString().length() - 1);
-        if (lastCharacter == '+' || lastCharacter == '*' || lastCharacter == '-' || lastCharacter == '/') {
-            processText.setText(processText.getText().toString().substring(0, processText.getText().toString().length() - 1));
-            processText.setText("" + processText.getText() + operator);
-        } else {
-            processText.setText("" + processText.getText() + operator);
+        if (!processText.getText().toString().equals("")) {
+            char lastCharacter = processText.getText().toString().charAt(processText.getText().toString().length() - 1);
+            if (lastCharacter == '+' || lastCharacter == '*' || lastCharacter == '-' || lastCharacter == '/' || lastCharacter == '.') {
+                processText.setText(processText.getText().toString().substring(0, processText.getText().toString().length() - 1));
+                processText.setText("" + processText.getText() + operator);
+            } else {
+                processText.setText("" + processText.getText() + operator);
+            }
         }
     }
 }
